@@ -9,5 +9,7 @@
 #' Quantifying the associations between dissolved organic matter and microbes under global change. \emph{Nature communications}.
 #' @examples data(Example_molcomm)
 "Example_molcomm"
+# DOM traits data
+#' @format Trait information for DOM in Example_molcomm
 #' @examples data(Example_moltrait)
 "Example_moltrait"
