@@ -12,6 +12,7 @@
 #' @rdname chemoDiv
 #' @export 
 chemoDiv <- function(chem_dataset) {
+  library(vegan)
   data.frame(Sample = rownames(chem_dataset),
              shannon = diversity(chem_dataset,index = "shannon"),
              simpson = diversity(chem_dataset,index = "simpson"),
