@@ -1,3 +1,20 @@
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param comm_dom PARAM_DESCRIPTION
+#' @param know_seq PARAM_DESCRIPTION
+#' @param n PARAM_DESCRIPTION, Default: length(know_seq)
+#' @param bootstrap PARAM_DESCRIPTION, Default: 100
+#' @param threshold PARAM_DESCRIPTION, Default: 0.3
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname iDEM
+#' @export 
 iDEM <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=0.3) {
   dark_seq <- colnames(comm_dom)[!colnames(comm_dom) %in% know_seq]
   know_sel <- sample(know_seq,n)
@@ -6,8 +23,8 @@ iDEM <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=
   list_net_know <- list()
   list_net_dk <- list()
   for (i in 1:bootstrap) {
-    net_know <- sparcc(comm_know)
-    net_dk <- sparcc(comm_dk)
+    net_know <- SpiecEasi::sparcc(comm_know)
+    net_dk <- SpiecEasi::sparcc(comm_dk)
     assign(paste("net_know",i),net_know)
     assign(paste("net_dk",i),net_dk)
     list_net_know[[i]] <- get(paste("net_know",i))
@@ -15,7 +32,7 @@ iDEM <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=
   }
   NET_node.metric <- function(sparcc.r,threshold){
     sparcc.r.all <- ifelse(abs(sparcc.r) > threshold, sparcc.r, 0)
-    g.all <- graph_from_adjacency_matrix(as.matrix(sparcc.r.all), mode = 'undirected', weighted = TRUE, diag = FALSE)
+    g.all <- igraph::graph_from_adjacency_matrix(as.matrix(sparcc.r.all), mode = 'undirected', weighted = TRUE, diag = FALSE)
     node.all <- data.frame(
       nodes_id = V(g.all)$name,Degree = degree(g.all)
       )
