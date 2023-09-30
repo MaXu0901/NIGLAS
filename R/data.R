@@ -7,9 +7,9 @@
 #' Quantifying microbial associations of dissolved organic matter under global change. \emph{bioRxiv}.
 #' @references Hu A, Choi M, Tanentzap AJ, Liu J, Jang K-S, Lennon JT, Liu Y, Soininen J, Lu X, Zhang Y, Shen J, Wang J. 2022.
 #' Quantifying the associations between dissolved organic matter and microbes under global change. \emph{Nature communications}.
-#' @examples data(Example_molcomm)
-"Example_molcomm"
+#' @examples data(Example_domcomm)
+"Example_domcomm"
 #' DOM traits data
 #' @format Trait information for DOM in Example_molcomm
-#' @examples data(Example_moltrait)
-"Example_moltrait"
+#' @examples data(Example_domtrait)
+"Example_domtrait"
