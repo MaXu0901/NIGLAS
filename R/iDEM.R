@@ -16,15 +16,15 @@
 #' # Select DOMs with well-defined chemical compositions
 #' know_seq <- Example_domtrait$MolForm[!is.na(Example_domtrait$El_comp)]
 #' # Calculate iDEM value
-#' idem <- iDEM(comm_dom = Example_domcomm,
+#' idme <- iDME(comm_dom = Example_domcomm,
 #'              know_seq = know_seq,
 #'              n = 50,
 #'              bootstrap = 10,
 #'              threshold = 0.03)
 #' }
-#' @rdname iDEM
+#' @rdname iDME
 #' @export 
-iDEM <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=0.3) {
+iDME <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=0.3) {
   dark_seq <- colnames(comm_dom)[!colnames(comm_dom) %in% know_seq]
   know_sel <- sample(know_seq,n)
   comm_know <- comm_dom[,know_sel]
