@@ -12,10 +12,10 @@
 #' }
 #' @seealso 
 #'  \code{\link[vegan]{vegdist}}
-#' @rdname molDis
+#' @rdname sampleDis
 #' @export 
 #' @importFrom vegan vegdist
-molDis <- function(dom_comm,method = "euclidean") {
+sampleDis <- function(dom_comm,method = "euclidean") {
   x <- vegan::vegdist(dom_comm,method = "bray")
   return(x)
 }
