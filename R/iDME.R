@@ -11,9 +11,9 @@
 #' \dontrun{
 #'  #EXAMPLE1
 #'  # Example data of a DOM compositional table (50 samples by 200 DOM molecules)
-#'  Example_domcomm
+#'  data(Example_domcomm)
 #'  # Example data of a DOM trait table
-#'  Example_domtrait
+#'  data(Example_domtrait)
 #'  # Select DOMs with well-defined chemical compositions
 #'  know_seq <- Example_domtrait$MolForm[!is.na(Example_domtrait$El_comp)]
 #'  # Calculate iDEM value
