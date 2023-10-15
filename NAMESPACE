@@ -2,9 +2,13 @@
 
 export(chemoDiv)
 export(iDME)
+export(molDK)
 export(molRA)
 export(sampleDis)
 importFrom(SpiecEasi,sparcc)
+importFrom(dplyr,case_when)
+importFrom(dplyr,mutate)
+importFrom(dplyr,select)
 importFrom(igraph,degree)
 importFrom(igraph,graph_from_adjacency_matrix)
 importFrom(vegan,decostand)
