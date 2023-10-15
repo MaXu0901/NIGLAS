@@ -11,6 +11,18 @@
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
+#'  # Example data of a DOM compositional table (50 samples by 200 DOM molecules)
+#'  Example_domcomm
+#'  # Example data of a DOM trait table
+#'  Example_domtrait
+#'  # Select DOMs with well-defined chemical compositions
+#'  know_seq <- Example_domtrait$MolForm[!is.na(Example_domtrait$El_comp)]
+#'  # Calculate iDEM value
+#'  idme <- iDME(comm_dom = Example_domcomm,
+#'              know_seq = know_seq,
+#'              n = 50,
+#'              bootstrap = 10,
+#'              threshold = 0.03)
 #'  }
 #' }
 #' @seealso 
