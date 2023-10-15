@@ -9,7 +9,6 @@
 #' @details DETAILS
 #' @examples 
 #' \dontrun{
-#' if(interactive()){
 #'  #EXAMPLE1
 #'  # Example data of a DOM compositional table (50 samples by 200 DOM molecules)
 #'  Example_domcomm
@@ -23,7 +22,6 @@
 #'              n = 50,
 #'              bootstrap = 10,
 #'              threshold = 0.03)
-#'  }
 #' }
 #' @seealso 
 #'  \code{\link[SpiecEasi]{sparcc}}
