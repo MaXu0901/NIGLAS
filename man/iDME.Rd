@@ -9,7 +9,8 @@ iDME(
   know_seq,
   n = length(know_seq),
   bootstrap = 100,
-  threshold = 0.3
+  occ.t = 0.3,
+  cor.t = 0.3
 )
 }
 \arguments{

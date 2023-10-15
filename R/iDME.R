@@ -30,7 +30,7 @@
 #' @export 
 #' @importFrom SpiecEasi sparcc
 #' @importFrom igraph graph_from_adjacency_matrix degree
-iDME <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=0.3) {
+iDME <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,occ.t = 0.3,cor.t=0.3) {
   dark_seq <- colnames(comm_dom)[!colnames(comm_dom) %in% know_seq]
   know_sel <- sample(know_seq,n)
   comm_know <- comm_dom[,know_sel]
@@ -46,7 +46,7 @@ iDME <- function(comm_dom,know_seq,n=length(know_seq),bootstrap = 100,threshold=
     list_net_dk[[i]] <- get(paste("net_dk",i))
   }
   NET_node.metric <- function(sparcc.r,threshold){
-    sparcc.r.all <- ifelse(abs(sparcc.r) > threshold, sparcc.r, 0)
+    sparcc.r.all <- ifelse(abs(sparcc.r) > cor.t, sparcc.r, 0)
     g.all <- igraph::graph_from_adjacency_matrix(as.matrix(sparcc.r.all), mode = 'undirected', weighted = TRUE, diag = FALSE)
     Degree = igraph::degree(g.all)
     

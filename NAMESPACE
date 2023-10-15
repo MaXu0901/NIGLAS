@@ -2,6 +2,10 @@
 
 export(chemoDiv)
 export(iDME)
+export(molDis)
+export(molRA)
 importFrom(SpiecEasi,sparcc)
 importFrom(igraph,degree)
 importFrom(igraph,graph_from_adjacency_matrix)
+importFrom(vegan,decostand)
+importFrom(vegan,vegdist)

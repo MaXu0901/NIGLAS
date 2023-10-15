@@ -5,9 +5,11 @@
 #' @details DETAILS
 #' @examples 
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' #EXAMPLE1
+#' # Example data of a DOM compositional table (50 samples by 200 DOM molecules)
+#' data(data)
+#' # Calculate selected types of α-diversity and evenness measures
+#' chemoDiv(data)
 #' }
 #' @rdname chemoDiv
 #' @export 
