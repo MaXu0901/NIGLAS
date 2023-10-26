@@ -1,3 +1,25 @@
+#' @title molReaAct
+#' @description FUNCTION_DESCRIPTION
+#' @param data PARAM_DESCRIPTION, Default: data
+#' @param mol PARAM_DESCRIPTION, Default: mol
+#' @param formula_column PARAM_DESCRIPTION
+#' @param error.term PARAM_DESCRIPTION, Default: 1e-05
+#' @param type PARAM_DESCRIPTION, Default: 'Dataset'
+#' @param HtoC_ratio_threshold PARAM_DESCRIPTION, Default: 1.5
+#' @param Trans_threshold PARAM_DESCRIPTION, Default: c(1, 10)
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso 
+#'  \code{\link[dplyr]{mutate-joins}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{case_when}}
+#' @rdname molReaAct
+#' @export 
+#' @importFrom dplyr left_join mutate case_when
 molReaAct <- function(data = data,mol = mol,formula_column,error.term = 0.000010, type = "Dataset",HtoC_ratio_threshold = 1.5, Trans_threshold = c(1,10)) {
   mol$C <- sapply(mol[[formula_column]], function(formula) {
     matches <- gregexpr("C\\d*", formula)
@@ -78,11 +100,10 @@ molReaAct <- function(data = data,mol = mol,formula_column,error.term = 0.000010
     bulk.peaks <- bulk.peaks[order(bulk.peaks$peak.x),]
     
     peak.2.peak = NULL
-    start_peak = 1
-    
+
     # i = 1
     # Running a loop to compare each peak to each other peak
-    for(i in start_peak:(ncol(data)-1)){ # I cannot stress the importance of the "-1" here...
+    for(i in 1:(ncol(data)-1)){ # I cannot stress the importance of the "-1" here...
       
       # Creating a data matrix to ensur no repeat or negative differences
       Distance_Results = bulk.peaks[-1:-i,] # Removing all peaks up to, and including the current peak
@@ -101,7 +122,7 @@ molReaAct <- function(data = data,mol = mol,formula_column,error.term = 0.000010
         
         mass.diff = trans.full$Mass[which(trans.full$Name == current.trans)]
         if (length(mass.diff) > 1) { break() }
-        Distance_Results$Trans.name[ which(Distance_Results$Dist.plus >= mass.diff & Distance_Results$Dist.minus <= mass.diff)] = current.trans
+        Distance_Results$Trans.name[which(Distance_Results$Dist.plus >= mass.diff & Distance_Results$Dist.minus <= mass.diff)] = current.trans
       }
       
       # Removing differences that didn't match any transformation
@@ -130,8 +151,8 @@ molReaAct <- function(data = data,mol = mol,formula_column,error.term = 0.000010
     peak.profile.dataset = peak.profile.dataset[rownames(mol),]
     mol$peak = rownames(mol)
     peak.profile.dataset.HC = peak.profile.dataset %>% 
-      left_join(mol,by = "peak") %>% 
-      mutate(Class = case_when(HtoC_ratio >= HtoC_ratio_threshold & num.trans.involved.in > Trans_threshold[2] ~"Labile_Active",
+      dplyr::left_join(mol,by = "peak") %>% 
+      dplyr::mutate(Class = dplyr::case_when(HtoC_ratio >= HtoC_ratio_threshold & num.trans.involved.in > Trans_threshold[2] ~"Labile_Active",
                                HtoC_ratio >= HtoC_ratio_threshold & num.trans.involved.in <= Trans_threshold[1] ~"Labile_Inactive",
                                HtoC_ratio < HtoC_ratio_threshold & num.trans.involved.in > Trans_threshold[2] ~"Recalcitrant_Active",
                                HtoC_ratio < HtoC_ratio_threshold & num.trans.involved.in <= Trans_threshold[1] ~"Recalcitrant_Inactive"))
